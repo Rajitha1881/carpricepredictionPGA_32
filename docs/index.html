@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Machine Learning & Data Science Portfolio | Rajitha</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-base: #0b0f19;
+            --bg-surface: #111827;
+            --bg-card: #1f2937;
+            --bg-card-hover: #283548;
+            --text-main: #f9fafb;
+            --text-muted: #9ca3af;
+            --primary: #38bdf8;
+            --primary-glow: rgba(56, 189, 248, 0.25);
+            --accent-green: #34d399;
+            --accent-purple: #a855f7;
+            --accent-amber: #fbbf24;
+            --border: #374151;
+            --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background-color: var(--bg-base);
+            color: var(--text-main);
+            font-family: var(--font);
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(11, 15, 25, 0.9);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .nav-brand {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+        .nav-brand span { color: var(--primary); }
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        .nav-links a:hover { color: var(--primary); }
+        .github-btn {
+            background: var(--bg-card);
+            color: #fff !important;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.2s !important;
+        }
+        .github-btn:hover {
+            border-color: var(--primary);
+            box-shadow: 0 0 12px var(--primary-glow);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2.5rem 1.5rem;
+        }
+
+        /* Hero */
+        .hero {
+            text-align: center;
+            padding: 3rem 1rem 4rem;
+            max-width: 860px;
+            margin: 0 auto;
+        }
+        .badge {
+            display: inline-block;
+            padding: 0.35rem 0.9rem;
+            border-radius: 9999px;
+            background: rgba(56, 189, 248, 0.1);
+            color: var(--primary);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1.25rem;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+        .hero h1 {
+            font-size: 2.85rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 1.25rem;
+            background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 50%, #94a3b8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .hero p {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 4rem;
+        }
+        .stat-card {
+            background: var(--bg-surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+        .stat-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--primary);
+        }
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 0.25rem;
+            font-feature-settings: "tnum";
+        }
+        .stat-card:nth-child(2) .stat-value { color: var(--accent-green); }
+        .stat-card:nth-child(3) .stat-value { color: var(--accent-purple); }
+        .stat-card:nth-child(4) .stat-value { color: var(--accent-amber); }
+        .stat-label {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        /* Project Section */
+        .section-header {
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 1rem;
+        }
+        .section-header h2 {
+            font-size: 1.85rem;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .project-card {
+            background: var(--bg-surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2.25rem;
+            margin-bottom: 2.5rem;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        .project-card:hover {
+            border-color: #4b5563;
+            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);
+        }
+        .project-meta {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+        .project-tag {
+            font-size: 0.75rem;
+            padding: 0.25rem 0.75rem;
+            border-radius: 6px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        .tag-regression { background: rgba(56, 189, 248, 0.15); color: var(--primary); }
+        .tag-classification { background: rgba(52, 211, 153, 0.15); color: var(--accent-green); }
+        .tag-automl { background: rgba(168, 85, 247, 0.15); color: var(--accent-purple); }
+        .project-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 0.75rem;
+        }
+        .project-desc {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Tech Highlights Grid */
+        .tech-highlights {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.25rem;
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 1.25rem;
+            margin-bottom: 1.5rem;
+        }
+        .highlight-item h4 {
+            font-size: 0.9rem;
+            color: var(--primary);
+            margin-bottom: 0.35rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+        .highlight-item p {
+            font-size: 0.88rem;
+            color: #d1d5db;
+        }
+
+        /* Benchmark Tables */
+        .table-responsive {
+            overflow-x: auto;
+            margin: 1.5rem 0;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+            text-align: left;
+        }
+        th, td {
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+        th {
+            background: #111827;
+            color: #94a3b8;
+            font-weight: 600;
+        }
+        tr:last-child td { border-bottom: none; }
+        tr:hover td { background: rgba(255, 255, 255, 0.02); }
+        .badge-top {
+            background: rgba(52, 211, 153, 0.2);
+            color: var(--accent-green);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 0.75rem;
+        }
+
+        /* Action Buttons */
+        .btn-view {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--primary);
+            color: #0f172a;
+            font-weight: 600;
+            padding: 0.75rem 1.4rem;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: all 0.2s;
+            margin-top: 0.5rem;
+        }
+        .btn-view:hover {
+            background: #7dd3fc;
+            box-shadow: 0 0 16px var(--primary-glow);
+            transform: translateY(-2px);
+        }
+
+        /* Skills Matrix */
+        .skills-section {
+            background: var(--bg-surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.25rem;
+        }
+        .skill-group h4 {
+            color: #fff;
+            margin-bottom: 0.75rem;
+            font-size: 1rem;
+        }
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        .skill-pill {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            padding: 0.35rem 0.75rem;
+            border-radius: 6px;
+            font-size: 0.82rem;
+            color: #e2e8f0;
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 3rem 1.5rem;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-top: 4rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.1rem; }
+            .project-card { padding: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-brand">
+            <i class="fa-solid fa-chart-line"></i>
+            <span>ML Analytics Portfolio</span>
+        </div>
+        <div class="nav-links">
+            <a href="#projects">Projects</a>
+            <a href="#skills">Skills</a>
+            <a href="https://github.com/Rajitha1881/carpricepredictionPGA_32" target="_blank" class="github-btn">
+                <i class="fa-brands fa-github"></i> GitHub Repo
+            </a>
+        </div>
+    </nav>
+
+    <div class="container">
+
+        <!-- Hero -->
+        <section class="hero">
+            <div class="badge"><i class="fa-solid fa-bolt"></i> Production-Grade Machine Learning</div>
+            <h1>Predictive Analytics & Statistical Modeling Portfolio</h1>
+            <p>End-to-end Machine Learning pipelines covering regression analysis, contextual classification, class imbalance resolution, and automated model benchmarking.</p>
+        </section>
+
+        <!-- KPI Metrics Grid -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-value">96.5%</div>
+                <div class="stat-label">5-Fold CV R² (Random Forest)</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">83%</div>
+                <div class="stat-label">RMSE Reduction vs Baseline</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">88.1%</div>
+                <div class="stat-label">Credit Default Classification Accuracy</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">3 Pipelines</div>
+                <div class="stat-label">Regression, Classification & AutoML</div>
+            </div>
+        </div>
+
+        <!-- Projects Header -->
+        <div id="projects" class="section-header">
+            <h2>Featured Projects & Interactive Reports</h2>
+        </div>
+
+        <!-- Project 1: Used Car Price Prediction -->
+        <div class="project-card">
+            <div class="project-meta">
+                <span class="project-tag tag-regression">Continuous Regression</span>
+                <span class="project-tag" style="background: rgba(255,255,255,0.08); color: #cbd5e1;">8,128 Records</span>
+                <span class="project-tag" style="background: rgba(255,255,255,0.08); color: #cbd5e1;">Hypothesis Testing</span>
+            </div>
+            <h3 class="project-title">1. Used Car Market Valuation & Price Prediction</h3>
+            <p class="project-desc">
+                An end-to-end regression system to forecast market selling prices for used automobiles. Includes text unit parsing, vehicle depreciation engineering, formal inferential statistical tests (t-tests, ANOVA, Chi-Square), and non-linear ensemble modeling.
+            </p>
+
+            <div class="tech-highlights">
+                <div class="highlight-item">
+                    <h4><i class="fa-solid fa-wrench"></i> Feature Engineering</h4>
+                    <p>Cleaned complex unit notations (kmpl, CC, bhp, rpm), extracted manufacturer brands, and derived age depreciation metrics.</p>
+                </div>
+                <div class="highlight-item">
+                    <h4><i class="fa-solid fa-flask"></i> Statistical Validation</h4>
+                    <p>Validated price divergences across transmission types via two-sample t-tests and verified multi-category variances via One-Way ANOVA.</p>
+                </div>
+                <div class="highlight-item">
+                    <h4><i class="fa-solid fa-bullseye"></i> Key Drivers</h4>
+                    <p>Engine max power (~72% importance) and vehicle age (~20% importance) accounted for over 92% of predictive importance.</p>
+                </div>
+            </div>
+
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Model Architecture</th>
+                            <th>Train R²</th>
+                            <th>5-Fold CV R²</th>
+                            <th>RMSE</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Multiple Linear Regression</td>
+                            <td>85.51%</td>
+                            <td>—</td>
+                            <td>~306,856</td>
+                            <td>Baseline</td>
+                        </tr>
+                        <tr>
+                            <td>Log-Linear Model (Target log(y))</td>
+                            <td>90.97%</td>
+                            <td>—</td>
+                            <td>~207,602</td>
+                            <td>Handled Skewness (-32% RMSE)</td>
+                        </tr>
+                        <tr>
+                            <td>Decision Tree Regressor (depth=8)</td>
+                            <td>97.89%</td>
+                            <td>93.33%</td>
+                            <td>~117,081</td>
+                            <td>Non-linear benchmark</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Random Forest Regressor (1000 Trees)</strong></td>
+                            <td><strong>99.59%</strong></td>
+                            <td><strong>96.52%</strong></td>
+                            <td><strong>~51,639</strong></td>
+                            <td><span class="badge-top">Top Performer (-83% RMSE)</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <a href="cars_realtime_me.html" class="btn-view">
+                View Full Execution Report <i class="fa-solid fa-arrow-right"></i>
+            </a>
+        </div>
+
+        <!-- Project 2: Contextual Coupon Recommendation -->
+        <div class="project-card">
+            <div class="project-meta">
+                <span class="project-tag tag-classification">Binary Classification</span>
+                <span class="project-tag" style="background: rgba(255,255,255,0.08); color: #cbd5e1;">12,684 Records</span>
+                <span class="project-tag" style="background: rgba(255,255,255,0.08); color: #cbd5e1;">Variance Diagnostics</span>
+            </div>
+            <h3 class="project-title">2. In-Vehicle Contextual Coupon Acceptance Prediction</h3>
+            <p class="project-desc">
+                Predicts whether a driver will accept an in-vehicle promotional coupon (restaurant, bar, coffee shop) based on immediate contextual attributes (weather, passenger, time, destination) and demographic characteristics.
+            </p>
+
+            <div class="tech-highlights">
+                <div class="highlight-item">
+                    <h4><i class="fa-solid fa-triangle-exclamation"></i> Overfitting Diagnostics</h4>
+                    <p>Identified severe variance in unpruned decision trees (99.4% train vs 59.8% CV) and applied max-depth constraints to restore model stability.</p>
+                </div>
+                <div class="highlight-item">
+                    <h4><i class="fa-solid fa-chart-area"></i> ROC-AUC Optimization</h4>
+                    <p>Trained a 1000-estimator Gradient Boosting Classifier (GBM), validating discrimination capability with ROC curve diagnostics near 1.0 AUC.</p>
+                </div>
+                <div class="highlight-item">
+                    <h4><i class="fa-solid fa-filter"></i> Data Preprocessing</h4>
+                    <p>Handled high-missingness columns (>99% NaN), imputed category frequencies, and applied Label and One-Hot encoding across 25 features.</p>
+                </div>
+            </div>
+
+            <a href="coupon_recommendation.html" class="btn-view">
+                View Full Execution Report <i class="fa-solid fa-arrow-right"></i>
+            </a>
+        </div>
+
+        <!-- Project 3: Financial Default Risk -->
+        <div class="project-card">
+            <div class="project-meta">
+                <span class="project-tag tag-automl">Imbalanced Data</span>
+                <span class="project-tag" style="background: rgba(255,255,255,0.08); color: #cbd5e1;">AutoML Benchmarking</span>
+                <span class="project-tag" style="background: rgba(255,255,255,0.08); color: #cbd5e1;">Financial Risk</span>
+            </div>
+            <h3 class="project-title">3. Financial Credit Default Risk Prediction & Multi-Model Benchmarking</h3>
+            <p class="project-desc">
+                Classifies customer loan and credit default risk using banking profile indicators (Employment status, Bank Balance, Annual Salary). Resolves real-world financial default class asymmetry and benchmarks 7 classification architectures.
+            </p>
+
+            <div class="tech-highlights">
+                <div class="highlight-item">
+                    <h4><i class="fa-solid fa-scale-balanced"></i> Class Imbalance Resolution</h4>
+                    <p>Implemented targeted random undersampling to balance non-default instances with default events, preventing majority-class bias.</p>
+                </div>
+                <div class="highlight-item">
+                    <h4><i class="fa-solid fa-microchip"></i> Automated 7-Model Suite</h4>
+                    <p>Engineered an automated evaluation pipeline benchmarking Logistic Regression, SVC, Decision Trees, AdaBoost, Gradient Boosting, Random Forest, and KNN.</p>
+                </div>
+                <div class="highlight-item">
+                    <h4><i class="fa-solid fa-award"></i> Optimal Architecture</h4>
+                    <p>Random Forest Classifier achieved top accuracy at 88.06%, closely followed by AdaBoost (87.31%) and Gradient Boosting (86.57%).</p>
+                </div>
+            </div>
+
+            <a href="default_fin_AUTOML_git.html" class="btn-view">
+                View Full Execution Report <i class="fa-solid fa-arrow-right"></i>
+            </a>
+        </div>
+
+        <!-- Skills Matrix -->
+        <section id="skills" class="skills-section">
+            <div class="section-header" style="margin-bottom: 1rem; border: none; padding: 0;">
+                <h2>Technical Toolkit & Methodologies</h2>
+            </div>
+            <div class="skills-grid">
+                <div class="skill-group">
+                    <h4><i class="fa-brands fa-python" style="color: var(--primary);"></i> Core Technologies</h4>
+                    <div class="skill-tags">
+                        <span class="skill-pill">Python</span>
+                        <span class="skill-pill">Pandas</span>
+                        <span class="skill-pill">NumPy</span>
+                        <span class="skill-pill">Scikit-Learn</span>
+                        <span class="skill-pill">SciPy</span>
+                    </div>
+                </div>
+                <div class="skill-group">
+                    <h4><i class="fa-solid fa-brain" style="color: var(--accent-green);"></i> ML Algorithms</h4>
+                    <div class="skill-tags">
+                        <span class="skill-pill">Random Forest</span>
+                        <span class="skill-pill">Gradient Boosting (GBM)</span>
+                        <span class="skill-pill">AdaBoost</span>
+                        <span class="skill-pill">Decision Trees</span>
+                        <span class="skill-pill">Linear Regression</span>
+                        <span class="skill-pill">K-Nearest Neighbors</span>
+                    </div>
+                </div>
+                <div class="skill-group">
+                    <h4><i class="fa-solid fa-square-root-variable" style="color: var(--accent-purple);"></i> Statistical Methods</h4>
+                    <div class="skill-tags">
+                        <span class="skill-pill">Two-Sample t-Tests</span>
+                        <span class="skill-pill">One-Way ANOVA</span>
+                        <span class="skill-pill">Chi-Square Tests</span>
+                        <span class="skill-pill">5-Fold Cross Validation</span>
+                        <span class="skill-pill">Log Transformations</span>
+                        <span class="skill-pill">ROC-AUC Diagnostics</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>GitHub Pages ML Portfolio | Source Code: <a href="https://github.com/Rajitha1881/carpricepredictionPGA_32" target="_blank" style="color: var(--primary); text-decoration: none;">Rajitha1881/carpricepredictionPGA_32</a></p>
+    </footer>
+
+</body>
+</html>

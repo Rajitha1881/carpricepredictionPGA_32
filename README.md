@@ -1,5 +1,7 @@
 # Machine Learning & Predictive Analytics Portfolio
 
+🌐 **Live Interactive Reports & Portfolio**: [https://rajitha1881.github.io/carpricepredictionPGA_32/](https://rajitha1881.github.io/carpricepredictionPGA_32/)
+
 This repository contains three end-to-end Machine Learning and statistical modeling projects covering regression, classification, imbalanced data handling, and automated model benchmarking:
 
 1. **[Used Car Market Valuation & Price Prediction](#1-used-car-market-valuation--price-prediction-cars_realtimemeipynb)** (`cars_realtime_me.ipynb`)
